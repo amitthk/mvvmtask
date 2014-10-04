@@ -15,7 +15,7 @@ namespace MvvmTask
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Common.BootStrapper.Bootstrap(this,e);
+            Common.BootStrapper.Instance.Bootstrap(this,e);
             base.OnStartup(e);
         }
 
@@ -23,7 +23,7 @@ namespace MvvmTask
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Common.BootStrapper.ShutDown(this, e);
+            Common.BootStrapper.Instance.ShutDown(this, e);
             base.OnExit(e);
         }
     }

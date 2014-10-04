@@ -4,7 +4,8 @@
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <ListView ItemsSource="{Binding TestList}">
-        </ListView>
+        <DataGrid ItemsSource="{Binding TodoList}" CanUserAddRows="True" CanUserDeleteRows="True" CanUserSortColumns="True" AutoGenerateColumns="True">
+            
+        </DataGrid>
     </Grid>
 </Window>

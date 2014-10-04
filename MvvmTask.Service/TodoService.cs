@@ -1,4 +1,4 @@
-﻿using MvvmTask.Service.Domain;
+﻿using MvvmTask.Service.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace MvvmTask.Service
         Todo Get(Guid id);
     }
 
-    [ServiceBehavior(InstanceContextMode=InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false)]
     public class TodoService:ITodoService
     {
         List<Todo> _lstDb = new List<Todo>();

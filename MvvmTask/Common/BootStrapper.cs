@@ -5,20 +5,43 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using MvvmTask.Service;
+using System.ServiceModel.Description;
 
 namespace MvvmTask.Common
 {
     class BootStrapper
     {
+        private static BootStrapper _instance;
+        public static BootStrapper Instance { get {
+            if (_instance==null)
+            {
+                _instance = new BootStrapper();
+            }
+            return (_instance);
+        } }
+
+        private BootStrapper()
+        {
+            _host = new ServiceHost(typeof(TodoService),new Uri("net.tcp://localhost:8889/todoservice"));
+        }
+
         private static ServiceHost _host;
 
-        internal static void Bootstrap(App app, System.Windows.StartupEventArgs e)
+        public void Bootstrap(App app, System.Windows.StartupEventArgs e)
         {
-            //do something for the app here
-            _host = new ServiceHost(typeof(TodoService));
+            //ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            //smb.HttpGetEnabled = true;
+            //smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            //_host.Description.Behaviors.Add(smb);
+
+            
+
             try
             {
-                _host.Open();
+                System.Threading.ThreadPool.QueueUserWorkItem(state =>
+                {
+                    _host.Open();
+                });
             }
             catch (Exception exc)
             {
@@ -27,7 +50,7 @@ namespace MvvmTask.Common
             }
         }
 
-        internal static void ShutDown(App app, System.Windows.ExitEventArgs e)
+        public void ShutDown(App app, System.Windows.ExitEventArgs e)
         {
             try
             {

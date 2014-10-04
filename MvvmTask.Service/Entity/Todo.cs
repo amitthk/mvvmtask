@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace MvvmTask.Service.Domain
+namespace MvvmTask.Service.Entity
 {
-    [DataContract]
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/MvvmTask.Service.Domain")]
     public class Todo
     {
         private Guid _Id;
