@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -20,8 +21,9 @@ namespace MvvmTask.ViewModels
         public ICommand LoadTodoCmd { get; private set; }
         public ICommand DeleteTodoCmd { get; private set; }
         public ICommand NewTodoCmd { get; private set; }
+        private readonly ICommand _CancelEditTodoCmd;
 
-
+        public ICommand CancelEditTodoCmd { get { return (_CancelEditTodoCmd); } }
         public ObservableCollection<TodoViewModel> TodoList { get; set; }
         private TodoViewModel _SelectedTodo;
         private int _TodoListSelectedIndex;
@@ -92,6 +94,7 @@ namespace MvvmTask.ViewModels
             ListTodosCmd = new RelayCommand(ExecListTodos, CanListTodos);
             AddTodoCmd = new RelayCommand(ExecAddTodo, CanAddTodo);
             NewTodoCmd = new RelayCommand(ExecNewTodo, CanNewTodo);
+            _CancelEditTodoCmd = new RelayCommand(ExecCancelEditTodo, CanCancelEditTodo);
 
         }
 
@@ -101,9 +104,25 @@ namespace MvvmTask.ViewModels
             TodoListSelectedIndex = -1;
         }
 
+        [DebuggerStepThrough]
         private bool CanNewTodo(object obj)
         {
             return (true);
+        }
+
+        private void ExecCancelEditTodo(object obj)
+        {
+            //Todo: Add the functionality for CancelEditTodoCmd Here
+            var ResetTodo = new TodoViewModel(_todoServiceClient.Get(Guid.Parse(SelectedTodo.Id)));
+            TodoList[TodoList.IndexOf(SelectedTodo)] = ResetTodo;
+            SelectedTodo = ResetTodo;
+        }
+
+        [DebuggerStepThrough]
+        private bool CanCancelEditTodo(object obj)
+        {
+            //Todo: Add the checking for CanCancelEditTodo Here
+            return (TodoListEditMode == EditMode.Update);
         }
 
         private void loadTodoList()

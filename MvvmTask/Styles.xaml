@@ -3,4 +3,13 @@
                     xmlns:c="clr-namespace:MvvmTask.Common">
     <c:InverseBooleanToVisibilityConverter x:Key="inverseBooleanToVisibilityConverter" />
     <c:EditModeToVisibilityConverter x:Key="editModeToVisibilityConverter" />
+
+    <Style TargetType="{x:Type Border}" x:Key="grayBorder">
+        <!-- All rows -->
+        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    
 </ResourceDictionary>
