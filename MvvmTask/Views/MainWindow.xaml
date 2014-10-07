@@ -4,8 +4,55 @@
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding TodoList}" CanUserAddRows="True" CanUserDeleteRows="True" CanUserSortColumns="True" AutoGenerateColumns="True">
-            
-        </DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding TodoList}" Grid.Row="0" Grid.Column="0" SelectedItem="{Binding SelectedTodo}" SelectedIndex="{Binding TodoListSelectedIndex}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Title}" Grid.Row="0" Grid.Column="0" />
+                        <TextBlock Text="{Binding Text}" Grid.Row="0" Grid.Column="1" />
+                        <TextBlock Text="{Binding EstimatedPomodori}" Grid.Row="0" Grid.Column="2" />
+                        <TextBlock Text="{Binding CompletedPomodori}" Grid.Row="0" Grid.Column="3" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"></RowDefinition>
+                <RowDefinition Height="24"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SelectedTodo.Title}" Grid.Row="0" Grid.Column="0" />
+            <TextBox Text="{Binding SelectedTodo.Text}" Grid.Row="0" Grid.Column="1" />
+            <TextBox Text="{Binding SelectedTodo.EstimatedPomodori}" Grid.Row="0" Grid.Column="2" />
+            <TextBox Text="{Binding SelectedTodo.CompletedPomodori}" Grid.Row="0" Grid.Column="3" />
+            <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Command="{Binding NewTodoCmd}" Visibility="{Binding TodoListEditMode, Converter={StaticResource editModeToVisibilityConverter}, ConverterParameter=Update}" Content="New"></Button>
+                <Button  Command="{Binding AddTodoCmd}" Visibility="{Binding TodoListEditMode, Converter={StaticResource editModeToVisibilityConverter}, ConverterParameter=Create}" Content="Add"></Button>
+                <Button  Command="{Binding UpdateTodoCmd}" Visibility="{Binding TodoListEditMode, Converter={StaticResource editModeToVisibilityConverter}, ConverterParameter=Update}" Content="Update"></Button>
+                <Button  Command="{Binding DeleteTodoCmd}" Visibility="{Binding TodoListEditMode, Converter={StaticResource editModeToVisibilityConverter}, ConverterParameter=Update}" Content="Delete"></Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

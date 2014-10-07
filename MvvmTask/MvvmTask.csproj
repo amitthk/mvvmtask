@@ -58,10 +58,16 @@
     </ApplicationDefinition>
     <Compile Include="Common\BaseViewModel.cs" />
     <Compile Include="Common\BootStrapper.cs" />
+    <Compile Include="Common\Converters.cs" />
+    <Compile Include="Common\EditMode.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ViewModelLocator.cs" />
     <Compile Include="ServiceClient\todoServiceProxy.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

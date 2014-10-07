@@ -12,7 +12,7 @@ namespace MvvmTask.Service
     public interface ITodoService
     {
         [OperationContract]
-        Guid Add(Todo todo);
+        string Add(Todo todo);
         [OperationContract]
         void Delete(Guid id);
         [OperationContract]
@@ -28,7 +28,7 @@ namespace MvvmTask.Service
     {
         List<Todo> _lstDb = new List<Todo>();
 
-        public Guid Add(Todo todo)
+        public string Add(Todo todo)
         {
             _lstDb.Add(todo);
             return (todo.Id);
@@ -36,12 +36,12 @@ namespace MvvmTask.Service
 
         public Todo Get(Guid id)
         {
-            return (_lstDb.Where(x => x.Id == id).FirstOrDefault());
+            return (_lstDb.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault());
         }
 
         public void Delete(Guid id)
         {
-            _lstDb.Remove(_lstDb.Where(x => x.Id == id).FirstOrDefault());
+            _lstDb.Remove(_lstDb.Where(x => x.Id.ToString() == id.ToString()).FirstOrDefault());
         }
 
         public List<Todo> List()

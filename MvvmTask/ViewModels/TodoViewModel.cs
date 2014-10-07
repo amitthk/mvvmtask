@@ -22,12 +22,14 @@ namespace MvvmTask.ViewModels
             _todo = todo;
         }
 
-        public Guid Id
+        public string Id
         {
             get { return _todo.Id; }
-            //set { _todo.Id = value;
-            //OnPropertyChanged("Id");
-            //}
+            set
+            {
+                _todo.Id = value;
+                OnPropertyChanged("Id");
+            }
         }
 
 

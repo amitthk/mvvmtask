@@ -31,7 +31,7 @@ namespace MvvmTask.Service.Domain
         
         private int EstimatedPomodoriField;
         
-        private System.Guid IdField;
+        private string IdField;
         
         private string TextField;
         
@@ -115,7 +115,7 @@ namespace MvvmTask.Service.Domain
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
+        public string Id
         {
             get
             {

@@ -6,6 +6,9 @@
             <!-- Resources scoped at the Application level should be defined here. -->
         <ResourceDictionary>
             <vm:ViewModelLocator x:Shared="False"  x:Key="Locator" xmlns:vm="clr-namespace:MvvmTask.Common" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -21,10 +21,15 @@ namespace MvvmTask.Service.Entity
         private string _AddedBy;
 
         [DataMember]
-        public Guid Id
+        public string Id
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return _Id.ToString(); }
+            set { _Id = Guid.NewGuid();
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    bool tmp = Guid.TryParse(value, out _Id);
+                }
+            }
         }
 
 
